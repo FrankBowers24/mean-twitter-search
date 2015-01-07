@@ -1,0 +1,43 @@
+<html ng-app="TwitterApp">
+
+<head>
+  <title>Twitter Search</title>
+  <link href="search_client.css" type="text/css" rel="stylesheet" />
+  <link href="tweet.css" type="text/css" rel="stylesheet" />
+  <script data-require="angular.js@*" data-semver="1.3.7" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.js"></script>
+  <script>
+    (function() {
+
+      var app = angular.module("TwitterApp", []);
+
+      app.controller('TweetController', function($scope, $http) {
+        $scope.searching = false;
+
+        $scope.search = function() {
+          $scope.searching = true;
+
+          $http.get('http://localhost:3000/search?q=' + encodeURIComponent($scope.search_terms))
+            .success(function(data) {
+              $scope.tweets = data.statuses;
+              $scope.searching = false;
+            })
+        }
+      });
+
+    }());
+  </script>
+</head>
+
+<body ng-controller="TweetController">
+  <div id="search_box">
+    <h1>Twitter Search</h1>
+    <input ng-model="search_terms" name="search_terms" autofocus="autofocus" />
+    <button ng-click="search()" id="search_button">Search</button>
+  </div>
+  <div id="search_results">
+    <div ng-show="searching">
+      <img src="ajax_loader.gif">Searching Twitter...</div>
+    <div ng-include="'tweet_template.html'" </div>
+</body>
+
+</html>

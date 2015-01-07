@@ -1,0 +1,13 @@
+{
+  "name": "mean-twitter-search",
+  "version": "1.0.0",
+  "description": "A basic example of using the Twitter API with node and Angular",
+  "dependencies": {
+    "express": "^4.9.8",
+    "node-twitter-api": "^1.5.0"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/frankbowers24/mean-twitter-search.git"
+  }
+}
